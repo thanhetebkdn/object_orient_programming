@@ -11,7 +11,7 @@ void DocumentManager::addDocument()
 {
     std::cout << "1. Book - 2.Magazine - 3. Newspaper\n";
     int select;
-    std::cout << "Enter Type Document";
+    std::cout << "Enter Type Document: ";
     std::cin >> select;
 
     std::unique_ptr<Document> document = nullptr;

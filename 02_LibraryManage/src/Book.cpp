@@ -9,6 +9,7 @@ Book::Book(std::string id, std::string publisher,
 void Book::inputInfor()
 {
     Document::inputInfor();
+    std::cin.ignore();
     std::cout << "Enter Author: ";
     std::getline(std::cin, author);
     std::cout << "Enter Pages: ";

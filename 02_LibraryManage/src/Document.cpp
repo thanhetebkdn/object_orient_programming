@@ -10,11 +10,11 @@ std::string Document::getId()
 
 void Document::inputInfor()
 {
-    std::cout << "Enter ID: " << id << std::endl;
+    std::cout << "Enter ID: ";
     std::cin >> id;
-    std::cout << "Enter Publisher : " << std::endl;
+    std::cout << "Enter Publisher: ";
     std::cin >> publisher;
-    std::cout << "Enter Release Count : " << std::endl;
+    std::cout << "Enter Release Count: ";
     std::cin >> releaseCount;
 }
 

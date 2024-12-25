@@ -17,7 +17,7 @@ SRC_FILES = $(SRC_DIR)/main.cpp \
 # Convert source files to object files
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-TARGET = exercise_2
+TARGET = output
 
 # Rule to create the build directory if it doesn't exist
 $(OBJ_DIR):
