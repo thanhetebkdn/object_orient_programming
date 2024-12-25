@@ -12,3 +12,7 @@ Thêm mới cán bộ.
 Tìm kiếm theo họ tên.
 Hiện thị thông tin về danh sách các cán bộ.
 Thoát khỏi chương trình.
+
+<p align="center">
+  <img src="./img/class_diagram.png" alt="" width="800">
+</p>
