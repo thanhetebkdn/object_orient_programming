@@ -1,5 +1,8 @@
 #include <CandidateC.h>
-CandidateC::CandidateC() {}
+CandidateC::CandidateC() : Candidate("", "", "", 0) {}
+CandidateC::CandidateC(std::string id, std::string name,
+                       std::string address, int priority)
+    : Candidate(id, name, address, priority) {}
 
 void CandidateC ::inputInfor()
 {

@@ -10,7 +10,7 @@ int main()
         std::cout << "3. Find a Candidate\n";
         std::cout << "4. Exit\n";
         int option;
-        std::cout << "Slect your option...!: ";
+        std::cout << "Slect your option...!: \n";
         std::cin >> option;
 
         switch (option)

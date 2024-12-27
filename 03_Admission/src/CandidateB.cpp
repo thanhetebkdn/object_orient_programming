@@ -1,6 +1,9 @@
 #include <CandidateB.h>
 
-CandidateB::CandidateB() {}
+CandidateB::CandidateB() : Candidate("", "", "", 0) {}
+CandidateB ::CandidateB(std::string id, std::string name,
+                        std::string address, int priority)
+    : Candidate(id, name, address, priority) {}
 
 void CandidateB ::inputInfor()
 {

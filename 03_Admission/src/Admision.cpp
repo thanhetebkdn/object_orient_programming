@@ -12,6 +12,7 @@ void Admision::addCandidate()
     int select;
     std::cout << "Choose your opition: ";
     std::cin >> select;
+    std::cin.ignore();
 
     std::shared_ptr<Candidate> candidate_n = nullptr;
 
@@ -54,13 +55,15 @@ void Admision::findCandidate()
     bool isFind = false;
     std::string findID;
     std::cout << "Enter your ID find: ";
+    std::cin.ignore();
     std::getline(std::cin, findID);
 
     for (auto &x : listCandidiate)
     {
         if (x->getId() == findID)
         {
-            std::cout << "Found id: " << findID << std::endl;
+
+            std::cout << "Found ID: " << findID << std::endl;
         }
 
         isFind = true;

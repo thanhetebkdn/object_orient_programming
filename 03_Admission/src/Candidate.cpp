@@ -12,6 +12,7 @@ std::string Candidate::getId()
 }
 void Candidate::inputInfor()
 {
+
     std::cout << "Enter your id: ";
     std::getline(std::cin, id);
 

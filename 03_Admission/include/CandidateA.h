@@ -1,4 +1,3 @@
-
 #ifndef CANDIDATEA_H
 #define CANDIDATEA_H
 
