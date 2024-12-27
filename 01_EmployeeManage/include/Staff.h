@@ -12,7 +12,7 @@ public:
     void displayInfo() override;
 
 private:
-    std::string job;
+    std::string job;    
 };
 
 #endif // STAFF_H
