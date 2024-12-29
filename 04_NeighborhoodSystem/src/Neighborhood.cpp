@@ -1,5 +1,7 @@
 #include "Neighborhood.h"
 
+Neighborhood::Neighborhood() {}
+
 void Neighborhood::addFamily(Family &family)
 {
     listFamily.push_back(family);

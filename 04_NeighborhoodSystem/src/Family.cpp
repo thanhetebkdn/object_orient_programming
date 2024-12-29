@@ -1,12 +1,11 @@
 #include "Family.h"
-Family::Family() {}
-Family::Family(std::string houseNumber, int numberMember)
+Family::Family()
     : houseNumber(""), numberMember(0) {}
-
+Family::Family(std::string houseNumber, int numberMember)
+    : houseNumber(houseNumber), numberMember(numberMember) {}
 void Family::addMember(const Person &person)
 {
     listPerson.push_back(person);
-    numberMember++;
 }
 
 std::string Family::getInfor() const
