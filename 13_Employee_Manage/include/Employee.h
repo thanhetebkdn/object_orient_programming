@@ -11,7 +11,7 @@
 class Employee
 {
 public:
-    Employee() = default;
+    Employee();
     Employee(int id, std::string fullName, std::string email,
              std::string phone, std::string birthday);
 
@@ -23,6 +23,7 @@ public:
 
     void setId(int id) { this->id = id; }
     int getId() { return id; }
+    virtual ~Employee() = default;
 
 private:
     int id;

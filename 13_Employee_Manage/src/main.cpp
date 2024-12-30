@@ -3,14 +3,14 @@
 
 void showMenu()
 {
-    std::cout << "========== Employee Management ==========\n";
-    std::cout << "1. Add New Employee\n";
-    std::cout << "2. Modify Employee by ID\n";
-    std::cout << "3. Delete Employee by ID\n";
-    std::cout << "4. Show All Employees\n";
-    std::cout << "5. Exit Program\n";
-    std::cout << "=========================================\n";
-    std::cout << "Enter your choice: ";
+    std::cout << "\n========== Employee Management ==========\n"
+              << "1. Add New Employee\n"
+              << "2. Modify Employee by ID\n"
+              << "3. Delete Employee by ID\n"
+              << "4. Show All Employees\n"
+              << "5. Exit Program\n"
+              << "=========================================\n"
+              << "Enter your choice: ";
 }
 
 int main()

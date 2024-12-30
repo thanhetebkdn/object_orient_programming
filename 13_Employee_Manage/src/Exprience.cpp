@@ -17,5 +17,5 @@ void Exprience::showInfor()
 {
     Employee::showInfor();
     std::cout << "Your Exprience Year: " << expInYear << std::endl;
-    std::cout << "Your Professional Skill : " << expInYear << std::endl;
+    std::cout << "Your Professional Skill : " << proSkill << std::endl;
 }

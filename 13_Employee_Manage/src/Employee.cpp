@@ -2,13 +2,15 @@
 #include "Certificate.h"
 
 int Employee::employeeCount = 0;
-Employee::Employee(int id, std::string fullName, std::string email,
-                   std::string phone, std::string birthday)
-    : id(id), fullName(fullName), email(email),
-      phone(phone), birthday(birthday)
+Employee::Employee() : id(0), fullName(""), email(""), phone(""), birthday("")
 {
     employeeCount++;
 }
+
+Employee::Employee(int id, std::string fullName, std::string email,
+                   std::string phone, std::string birthday)
+    : id(id), fullName(fullName), email(email),
+      phone(phone), birthday(birthday) {}
 
 void Employee::addCertificate(std::unique_ptr<Certificate> cert)
 {
@@ -38,6 +40,18 @@ void Employee::inputInfor()
     {
         std::cerr << "Invalid Employee Type! Defaulting to Experience." << std::endl;
         employeeType = EmployeeType::Exprience;
+    }
+
+    int certCount;
+    std::cout << "Enter number of Certificates: ";
+    std::cin >> certCount;
+
+    for (int i = 0; i < certCount; i++)
+    {
+        std::cout << "Enter details for Certificate " << i + 1 << ":" << std::endl;
+        auto cert = std::make_unique<Certificate>();
+        cert->inputCer();
+        addCertificate(std::move(cert));
     }
 }
 

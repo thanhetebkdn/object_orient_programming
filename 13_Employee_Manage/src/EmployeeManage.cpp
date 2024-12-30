@@ -17,7 +17,7 @@ void EmployeeManage::modifyID()
 
     for (auto &employee : listEmployee)
     {
-        if (employee->getEmployeeCount() == searchID)
+        if (employee->getId() == searchID)
         {
             std::cout << "Enter the new ID: ";
             std::cin >> newID;
@@ -37,7 +37,7 @@ void EmployeeManage::deleteByID()
     auto it = std::remove_if(listEmployee.begin(), listEmployee.end(),
                              [searchID](const std::unique_ptr<Employee> &employee)
                              {
-                                 return employee->getEmployeeCount() == searchID; // Giả sử Employee có phương thức getID
+                                 return employee->getId() == searchID;
                              });
 
     if (it != listEmployee.end())
@@ -109,6 +109,7 @@ void EmployeeManage::showAllEmployee()
         for (const auto &employee : listEmployee)
         {
             employee->showInfor();
+            std::cout << "Totol Employee:" << Employee::getEmployeeCount() << std::endl;
             std::cout << "----------------------\n";
         }
         break;
