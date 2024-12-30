@@ -13,6 +13,7 @@ SRC_FILES = $(SRC_DIR)/Certificate.cpp \
             $(SRC_DIR)/Exprience.cpp \
             $(SRC_DIR)/Fresher.cpp \
             $(SRC_DIR)/Intern.cpp\
+            $(SRC_DIR)/Valid.cpp\
             $(SRC_DIR)/main.cpp
            
 
