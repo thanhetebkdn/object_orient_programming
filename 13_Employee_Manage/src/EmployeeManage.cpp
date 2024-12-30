@@ -1,12 +1,13 @@
-#include <EmployeeManage.h>
-#include <Employee.h>
 #include <algorithm>
+#include "EmployeeManage.h"
+#include "Employee.h"
+#include "EmployeeType.h"
 void EmployeeManage::addNewEmployee()
 {
     auto newEmployee = std::make_unique<Employee>();
     newEmployee->inputInfor();
     listEmployee.push_back(std::move(newEmployee));
-    std::cout << "New employee added success...!";
+    std::cout << "New employee added success...!\n";
 }
 void EmployeeManage::modifyID()
 {
@@ -24,8 +25,8 @@ void EmployeeManage::modifyID()
             std::cout << "ID updated successfully!\n";
             return;
         }
+        std::cout << "Employee with ID " << searchID << " not found.\n";
     }
-    std::cout << "Employee with ID " << searchID << " not found.\n";
 }
 void EmployeeManage::deleteByID()
 {
@@ -67,12 +68,15 @@ void EmployeeManage::showAllEmployee()
 
     switch (select)
     {
-    case 1:
+    case 1: // Exprience
         std::cout << "\nEmployees of type Exprience:\n";
         for (const auto &employee : listEmployee)
         {
-            employee->showInfor();
-            std::cout << "----------------------\n";
+            if (employee->getEmployeeType() == EmployeeType::Exprience)
+            {
+                employee->showInfor();
+                std::cout << "----------------------\n";
+            }
         }
         break;
 
@@ -80,9 +84,11 @@ void EmployeeManage::showAllEmployee()
         std::cout << "\nEmployees of type Fresher:\n";
         for (const auto &employee : listEmployee)
         {
-
-            employee->showInfor();
-            std::cout << "----------------------\n";
+            if (employee->getEmployeeType() == EmployeeType::Fresher)
+            {
+                employee->showInfor();
+                std::cout << "----------------------\n";
+            }
         }
         break;
 
@@ -90,9 +96,11 @@ void EmployeeManage::showAllEmployee()
         std::cout << "\nEmployees of type Intern:\n";
         for (const auto &employee : listEmployee)
         {
-
-            employee->showInfor();
-            std::cout << "----------------------\n";
+            if (employee->getEmployeeType() == EmployeeType::Intern)
+            {
+                employee->showInfor();
+                std::cout << "----------------------\n";
+            }
         }
         break;
 

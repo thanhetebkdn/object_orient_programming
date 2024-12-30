@@ -18,7 +18,7 @@ int main()
     EmployeeManage employeeManage;
     int choice = 0;
 
-    while (choice != 5) // Thoát chương trình khi người dùng chọn 5
+    while (choice != 5)
     {
         showMenu();
         std::cin >> choice;
@@ -42,12 +42,11 @@ int main()
             break;
 
         case 5:
-            std::cout << "Exiting program. Goodbye!\n";
             employeeManage.exitProgram();
             break;
 
         default:
-            std::cerr << "Invalid choice! Please try again.\n";
+            std::cerr << "Please try again.\n";
             break;
         }
     }

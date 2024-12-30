@@ -12,6 +12,7 @@ Certificate::Certificate(std::string cerID, std::string cerName,
 void Certificate::inputCer()
 {
     std::cout << "Enter your Certificate ID: ";
+    std::cin.ignore();
     std::getline(std::cin, certificateID);
     std::cout << "Enter your Certificate Name: ";
     std::getline(std::cin, certificateName);

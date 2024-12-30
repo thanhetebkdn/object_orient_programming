@@ -1,4 +1,5 @@
 #include "Employee.h"
+#include "Certificate.h"
 
 int Employee::employeeCount = 0;
 Employee::Employee(int id, std::string fullName, std::string email,
@@ -7,6 +8,11 @@ Employee::Employee(int id, std::string fullName, std::string email,
       phone(phone), birthday(birthday)
 {
     employeeCount++;
+}
+
+void Employee::addCertificate(std::unique_ptr<Certificate> cert)
+{
+    certificates.push_back(std::move(cert));
 }
 
 void Employee::inputInfor()
@@ -43,6 +49,7 @@ void Employee::showInfor()
     std::cout << "Your Phone: " << phone << std::endl;
     std::cout << "Your Birthday: " << birthday << std::endl;
     std::cout << "Employee Type: ";
+
     switch (employeeType)
     {
     case EmployeeType::Exprience:
@@ -57,13 +64,26 @@ void Employee::showInfor()
     }
 
     std::cout << "Certificates: " << std::endl;
-    for (const auto &cert : certificates)
+    if (certificates.empty())
     {
-        cert->showCertificate();
+        std::cout << "No certificates available." << std::endl;
+    }
+    else
+    {
+        for (const auto &cert : certificates)
+        {
+            cert->showCertificate();
+            std::cout << "----------------------" << std::endl;
+        }
     }
 }
 
 int Employee::getEmployeeCount()
 {
     return employeeCount;
+}
+
+EmployeeType Employee::getEmployeeType() const
+{
+    return employeeType;
 }

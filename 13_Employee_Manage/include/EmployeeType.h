@@ -6,6 +6,7 @@ enum class EmployeeType
     Exprience = 0,
     Fresher = 1,
     Intern = 2
+
 };
 
 #endif

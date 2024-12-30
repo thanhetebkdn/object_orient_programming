@@ -19,6 +19,7 @@ public:
     virtual void showInfor();
     void addCertificate(std::unique_ptr<Certificate>);
     static int getEmployeeCount();
+    EmployeeType getEmployeeType() const;
 
     void setId(int id) { this->id = id; }
     int getId() { return id; }
