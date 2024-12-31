@@ -17,4 +17,4 @@ private:
     std::vector<std::unique_ptr<Employee>> employeeList;
 };
 
-#endif // EMPLOYEEMANAGER_H
+#endif

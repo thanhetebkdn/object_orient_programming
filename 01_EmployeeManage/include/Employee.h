@@ -19,4 +19,4 @@ private:
     std::string address;
 };
 
-#endif // EMPLOYEE_H
+#endif

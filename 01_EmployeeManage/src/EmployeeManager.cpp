@@ -1,7 +1,7 @@
 #include "EmployeeManager.h"
-#include "Worker.h"   // Include Worker header
-#include "Engineer.h" // Include Engineer header
-#include "Staff.h"    // Include Staff header
+#include "Worker.h"
+#include "Engineer.h"
+#include "Staff.h"
 #include <iostream>
 #include <memory>
 
@@ -30,8 +30,8 @@ void EmployeeManager::addNewEmployee()
         std::cout << "Invalid input\n";
         return;
     }
-    employee->inputInfo();                       // Nhập thông tin của nhân viên
-    employeeList.push_back(std::move(employee)); // Lưu trữ đối tượng vào danh sách
+    employee->inputInfo();
+    employeeList.push_back(std::move(employee));
 }
 
 void EmployeeManager::searchByName()

@@ -15,4 +15,4 @@ private:
     int level;
 };
 
-#endif // WORKER_H
+#endif

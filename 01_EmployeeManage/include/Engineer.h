@@ -15,4 +15,4 @@ private:
     std::string major;
 };
 
-#endif // ENGINEER_H
+#endif
