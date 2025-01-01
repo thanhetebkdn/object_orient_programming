@@ -1,38 +1,48 @@
-#include <Student.h>
-#include <ManageStudent.h>
+#include "ManageStudent.h"
 
 void ManageStudent::addStudent(std::unique_ptr<Student> student)
 {
-    student->inputInfor();
     listStudent.push_back(std::move(student));
 }
 
-void ManageStudent::displayStudent_O1() const
+void ManageStudent::displayStudentsWithAge20() const
 {
-    std::cout << "List student age equal 20" << std::endl;
+    bool found = false;
+    std::cout << "List of students age 20:\n";
     for (const auto &s : listStudent)
     {
         if (s->getAge() == 20)
         {
             s->displayInfor();
+            found = true;
         }
+    }
+    if (!found)
+    {
+        std::cout << "No students age 20 found.\n";
     }
 }
 
-void ManageStudent::displayStudent_O2() const
+void ManageStudent::displayStudentsFromDaNangWithAge23() const
 {
-    std::cout << "List student age equal 20 && address is Da Nang" << std::endl;
+    bool found = false;
+    std::cout << "List of students age 23 from Da Nang:\n";
     for (const auto &s : listStudent)
     {
-        if (s->getAddress() == "DaNang" && s->getAge() == 23)
+        if (s->getAge() == 23 && s->getAddress() == "DaNang")
         {
             s->displayInfor();
+            found = true;
         }
+    }
+    if (!found)
+    {
+        std::cout << "No students age 23 from Da Nang found.\n";
     }
 }
 
 void ManageStudent::exitProgram() const
 {
-    std::cout << "Exit the program...!";
+    std::cout << "Exiting the program...\n";
     exit(0);
 }
