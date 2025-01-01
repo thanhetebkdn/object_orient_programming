@@ -1,31 +1,80 @@
 #include "Certificate.h"
+#include "Valid.h"
+#include "Exception.h"
+#include <iostream>
+#include <string>
 
 Certificate::Certificate()
     : certificateID(""), certificateName(""),
       certificateRank(""), certificateDate("") {}
 
-Certificate::Certificate(std::string cerID, std::string cerName,
-                         std::string cerRank, std::string cerDate)
-    : certificateID(cerID), certificateName(cerName),
-      certificateRank(cerRank), certificateDate(cerDate) {}
-
 void Certificate::inputCer()
 {
-    std::cout << "Enter your Certificate ID: ";
-    std::cin.ignore();
-    std::getline(std::cin, certificateID);
-    std::cout << "Enter your Certificate Name: ";
-    std::getline(std::cin, certificateName);
-    std::cout << "Enter your Certificate Rank: ";
-    std::getline(std::cin, certificateRank);
-    std::cout << "Enter your Certificate Date: ";
-    std::getline(std::cin, certificateDate);
+    do
+    {
+        std::cout << "Enter your Certificate ID: ";
+        std::getline(std::cin, certificateID);
+        try
+        {
+            isValidCertificateID(certificateID);
+            break;
+        }
+        catch (const CertificateIDException &e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+    } while (true);
+
+    do
+    {
+        std::cout << "Enter your Certificate Name: ";
+        std::getline(std::cin, certificateName);
+        try
+        {
+            isValidCertificateName(certificateName);
+            break;
+        }
+        catch (const CertificateNameException &e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+    } while (true);
+
+    do
+    {
+        std::cout << "Enter your Certificate Rank: ";
+        std::getline(std::cin, certificateRank);
+        try
+        {
+            isValidCertificateRank(certificateRank);
+            break;
+        }
+        catch (const CertificateRankException &e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+    } while (true);
+
+    do
+    {
+        std::cout << "Enter your Certificate Date (dd/mm/yyyy): ";
+        std::getline(std::cin, certificateDate);
+        try
+        {
+            isValidCertificateDate(certificateDate);
+            break;
+        }
+        catch (const CertificateDateException &e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+    } while (true);
 }
 
 void Certificate::showCertificate() const
 {
-    std::cout << "Certidicate ID: " << certificateID << std::endl;
-    std::cout << "Certidicate Name: " << certificateName << std::endl;
-    std::cout << "Certidicate Rank: " << certificateRank << std::endl;
-    std::cout << "Certidicate Date: " << certificateDate << std::endl;
+    std::cout << "Certificate ID: " << certificateID << std::endl;
+    std::cout << "Certificate Name: " << certificateName << std::endl;
+    std::cout << "Certificate Rank: " << certificateRank << std::endl;
+    std::cout << "Certificate Date: " << certificateDate << std::endl;
 }

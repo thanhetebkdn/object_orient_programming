@@ -1,6 +1,7 @@
 #include "Employee.h"
 #include "Certificate.h"
 #include "Valid.h"
+#include "Exception.h"
 
 int Employee::employeeCount = 0;
 
@@ -23,7 +24,6 @@ void Employee::inputInfor()
 {
     int type;
 
-    // Kiểm tra tính hợp lệ của ID (giả sử ID là một số dương)
     do
     {
         std::cout << "Enter your ID: ";
@@ -34,51 +34,73 @@ void Employee::inputInfor()
         }
     } while (id <= 0);
 
-    // Kiểm tra tính hợp lệ của tên
     do
     {
         std::cout << "Enter your FullName: ";
         std::getline(std::cin >> std::ws, fullName);
-        if (!isValidName(fullName))
+        try
         {
-            std::cerr << "Invalid name. Please enter again." << std::endl;
+            isValidName(fullName);
         }
-    } while (!isValidName(fullName));
+        catch (const FullNameException &e)
+        {
+            std::cerr << e.what() << std::endl;
+            continue;
+        }
+        break;
+    } while (true);
 
-    // Kiểm tra tính hợp lệ của email
     do
     {
         std::cout << "Enter your Email: ";
         std::cin >> email;
-        if (!isValidEmail(email))
+        try
         {
-            std::cerr << "Invalid email. Please enter again." << std::endl;
+            isValidEmail(email);
         }
-    } while (!isValidEmail(email));
+        catch (const EmailException &e)
+        {
+            std::cerr << e.what() << std::endl;
+            continue;
+        }
+        break;
 
-    // Kiểm tra tính hợp lệ của số điện thoại
+    } while (true);
+
     do
     {
         std::cout << "Enter your Phone: ";
         std::cin >> phone;
-        if (!isValidPhone(phone))
+        try
         {
-            std::cerr << "Invalid phone number. Please enter again." << std::endl;
+            isValidPhone(phone);
         }
-    } while (!isValidPhone(phone));
+        catch (const PhoneException &e)
+        {
+            std::cerr << e.what() << std::endl;
+            continue;
+        }
+        break;
 
-    // Kiểm tra tính hợp lệ của ngày sinh
+    } while (true);
+
     do
     {
         std::cout << "Enter your Birthday (dd/mm/yyyy): ";
         std::cin >> birthday;
-        if (!isValidBirthday(birthday))
+        try
         {
-            std::cerr << "Invalid birthday. Please enter again." << std::endl;
+            isValidBirthday(birthday);
         }
-    } while (!isValidBirthday(birthday));
+        catch (const BirthdayException &e)
+        {
+            std::cerr << e.what() << std::endl;
+            continue;
+        }
+        break;
 
-    // Nhập loại nhân viên và kiểm tra
+    } while (true);
+
     std::cout << "Enter Employee Type (0: Experience, 1: Fresher, 2: Intern): ";
     std::cin >> type;
     if (type >= 0 && type <= 2)
@@ -91,7 +113,6 @@ void Employee::inputInfor()
         employeeType = EmployeeType::Exprience;
     }
 
-    // Nhập số lượng chứng chỉ
     int certCount;
     std::cout << "Enter number of Certificates: ";
     std::cin >> certCount;
