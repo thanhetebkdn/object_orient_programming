@@ -20,4 +20,4 @@ public:
     void ShowMyInfo() override;
 };
 
-#endif // NORMALSTUDENT_H
+#endif 

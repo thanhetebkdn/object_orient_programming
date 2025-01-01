@@ -18,7 +18,7 @@ public:
     void DisplayAllStudents();
     void SelectCandidates(int count);
     void SortStudents();
-    void InputStudent(); // Thêm hàm nhập thông tin sinh viên
+    void InputStudent();
 };
 
-#endif // RECRUITMENTMANAGER_H
+#endif

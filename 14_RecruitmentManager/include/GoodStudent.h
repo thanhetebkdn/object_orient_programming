@@ -19,4 +19,4 @@ public:
     double GetGPA();
 };
 
-#endif // GOODSTUDENT_H
+#endif

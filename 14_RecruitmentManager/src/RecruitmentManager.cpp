@@ -1,6 +1,10 @@
 #include "RecruitmentManager.h"
 #include <iostream>
-#include <algorithm>
+#include <string>
+#include <memory>
+#include <regex>
+#include "Exception.h"
+#include "Validation.h"
 
 RecruitmentManager::RecruitmentManager() {}
 
@@ -30,7 +34,6 @@ void RecruitmentManager::SelectCandidates(int count)
     std::vector<std::shared_ptr<GoodStudent>> goodStudents;
     std::vector<std::shared_ptr<NormalStudent>> normalStudents;
 
-    // Phân loại sinh viên
     for (const auto &student : students)
     {
         if (std::shared_ptr<GoodStudent> goodStudent = std::dynamic_pointer_cast<GoodStudent>(student))
@@ -43,7 +46,6 @@ void RecruitmentManager::SelectCandidates(int count)
         }
     }
 
-    // Sắp xếp GoodStudent theo GPA, nếu bằng nhau thì sắp xếp theo fullName
     std::sort(goodStudents.begin(), goodStudents.end(), [](const std::shared_ptr<GoodStudent> &a, const std::shared_ptr<GoodStudent> &b)
               {
         if (a->GetGPA() != b->GetGPA()) {
@@ -51,7 +53,6 @@ void RecruitmentManager::SelectCandidates(int count)
         }
         return a->GetFullName() < b->GetFullName(); });
 
-    // Sắp xếp NormalStudent theo entryTestScore, nếu bằng nhau thì sắp xếp theo englishScore, sau đó theo fullName
     std::sort(normalStudents.begin(), normalStudents.end(), [](const std::shared_ptr<NormalStudent> &a, const std::shared_ptr<NormalStudent> &b)
               {
         if (a->GetEntryTestScore() != b->GetEntryTestScore()) {
@@ -66,7 +67,6 @@ void RecruitmentManager::SelectCandidates(int count)
 
     int selectedCount = 0;
 
-    // Lựa chọn ứng viên khá giỏi
     for (const auto &goodStudent : goodStudents)
     {
         if (selectedCount >= count)
@@ -76,7 +76,6 @@ void RecruitmentManager::SelectCandidates(int count)
         selectedCount++;
     }
 
-    // Lựa chọn ứng viên trung bình nếu chưa đủ số lượng
     for (const auto &normalStudent : normalStudents)
     {
         if (selectedCount >= count)
@@ -94,15 +93,14 @@ void RecruitmentManager::SelectCandidates(int count)
 
 void RecruitmentManager::SortStudents()
 {
-    // Sắp xếp toàn bộ sinh viên trong danh sách giảm dần theo fullName và tăng dần theo phoneNumber
+
     std::sort(students.begin(), students.end(), [](const std::shared_ptr<Student> &a, const std::shared_ptr<Student> &b)
               {
                   if (a->GetFullName() != b->GetFullName())
                   {
-                      return a->GetFullName() > b->GetFullName(); // Giảm dần theo fullName
+                      return a->GetFullName() > b->GetFullName(); 
                   }
-                  return a->GetPhoneNumber() < b->GetPhoneNumber(); // Tăng dần theo phoneNumber
-              });
+                  return a->GetPhoneNumber() < b->GetPhoneNumber(); });
 
     std::cout << "Students sorted successfully.\n";
 }
@@ -113,21 +111,60 @@ void RecruitmentManager::InputStudent()
     std::cout << "Enter type of student (1: GoodStudent, 2: NormalStudent): ";
     std::cin >> choice;
 
-    std::cin.ignore(); // Bỏ qua ký tự newline còn sót sau khi nhập số
+    std::cin.ignore();
 
     std::string fullName, doB, sex, phoneNumber, universityName, gradeLevel;
 
-    std::cout << "Enter full name: ";
-    std::getline(std::cin, fullName);
+    while (true)
+    {
+        std::cout << "Enter full name: ";
+        std::getline(std::cin, fullName);
 
-    std::cout << "Enter date of birth (dd/MM/yyyy): ";
-    std::getline(std::cin, doB);
+        try
+        {
+            isValidFullName(fullName);
+            break;
+        }
+        catch (const InvalidFullNameException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+
+    while (true)
+    {
+        std::cout << "Enter date of birth (dd/MM/yyyy): ";
+        std::getline(std::cin, doB);
+
+        try
+        {
+            isValidBirthday(doB);
+            break;
+        }
+        catch (const InvalidDOBException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
 
     std::cout << "Enter gender: ";
     std::getline(std::cin, sex);
 
-    std::cout << "Enter phone number: ";
-    std::getline(std::cin, phoneNumber);
+    while (true)
+    {
+        std::cout << "Enter phone number: ";
+        std::getline(std::cin, phoneNumber);
+
+        try
+        {
+            isValidPhoneNumber(phoneNumber);
+            break;
+        }
+        catch (const InvalidPhoneNumberException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
 
     std::cout << "Enter university name: ";
     std::getline(std::cin, universityName);
@@ -136,14 +173,14 @@ void RecruitmentManager::InputStudent()
     std::getline(std::cin, gradeLevel);
 
     if (choice == 1)
-    { // GoodStudent
+    {
         float gpa;
         std::string bestRewardName;
 
         std::cout << "Enter GPA: ";
         std::cin >> gpa;
 
-        std::cin.ignore(); // Bỏ qua ký tự newline còn sót sau khi nhập số
+        std::cin.ignore();
 
         std::cout << "Enter best reward name: ";
         std::getline(std::cin, bestRewardName);
@@ -153,7 +190,7 @@ void RecruitmentManager::InputStudent()
         AddStudent(goodStudent);
     }
     else if (choice == 2)
-    { // NormalStudent
+    {
         int englishScore, entryTestScore;
 
         std::cout << "Enter English score (TOEIC): ";
