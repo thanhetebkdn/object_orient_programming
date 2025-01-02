@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++17 -Wall -g
 SRC_DIR = src
 INC_DIR = include
 OBJ_DIR = build
-
+BIN_DIR = bin
 # List source files and automatically convert them to object files
 SRC_FILES = $(SRC_DIR)/main.cpp \
             $(SRC_DIR)/Candidate.cpp \
@@ -17,8 +17,7 @@ SRC_FILES = $(SRC_DIR)/main.cpp \
 # Convert source files to object files
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-TARGET = output
-
+TARGET = $(BIN_DIR)/output
 # Rule to create the build directory if it doesn't exist
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
