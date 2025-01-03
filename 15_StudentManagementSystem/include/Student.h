@@ -19,7 +19,6 @@ public:
     virtual bool isFullTime();
     float getEntryScore();
     int getEnrollmentYear() const;
-
     std::vector<std::shared_ptr<AcademicResult>> &getAcademicResults();
 
 private:

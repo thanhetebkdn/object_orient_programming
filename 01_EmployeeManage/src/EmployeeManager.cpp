@@ -1,9 +1,9 @@
+#include <iostream>
+#include <memory>
 #include "EmployeeManager.h"
 #include "Worker.h"
 #include "Engineer.h"
 #include "Staff.h"
-#include <iostream>
-#include <memory>
 
 void EmployeeManager::addNewEmployee()
 {

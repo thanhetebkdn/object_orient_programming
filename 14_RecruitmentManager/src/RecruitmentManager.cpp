@@ -13,98 +13,6 @@ void RecruitmentManager::AddStudent(std::shared_ptr<Student> student)
     students.push_back(student);
 }
 
-void RecruitmentManager::DisplayAllStudents()
-{
-    std::cout << "=== All Students ===" << std::endl;
-    for (const auto &student : students)
-    {
-        student->ShowMyInfo();
-        std::cout << "-------------------" << std::endl;
-    }
-}
-
-void RecruitmentManager::SelectCandidates(int count)
-{
-    if (count < 11 || count > 15)
-    {
-        std::cout << "Invalid number of candidates. Please choose between 11 and 15.\n";
-        return;
-    }
-
-    std::vector<std::shared_ptr<GoodStudent>> goodStudents;
-    std::vector<std::shared_ptr<NormalStudent>> normalStudents;
-
-    for (const auto &student : students)
-    {
-        if (std::shared_ptr<GoodStudent> goodStudent = std::dynamic_pointer_cast<GoodStudent>(student))
-        {
-            goodStudents.push_back(goodStudent);
-        }
-        else if (std::shared_ptr<NormalStudent> normalStudent = std::dynamic_pointer_cast<NormalStudent>(student))
-        {
-            normalStudents.push_back(normalStudent);
-        }
-    }
-
-    std::sort(goodStudents.begin(), goodStudents.end(), [](const std::shared_ptr<GoodStudent> &a, const std::shared_ptr<GoodStudent> &b)
-              {
-        if (a->GetGPA() != b->GetGPA()) {
-            return a->GetGPA() > b->GetGPA();
-        }
-        return a->GetFullName() < b->GetFullName(); });
-
-    std::sort(normalStudents.begin(), normalStudents.end(), [](const std::shared_ptr<NormalStudent> &a, const std::shared_ptr<NormalStudent> &b)
-              {
-        if (a->GetEntryTestScore() != b->GetEntryTestScore()) {
-            return a->GetEntryTestScore() > b->GetEntryTestScore();
-        }
-        if (a->GetEnglishScore() != b->GetEnglishScore()) {
-            return a->GetEnglishScore() > b->GetEnglishScore();
-        }
-        return a->GetFullName() < b->GetFullName(); });
-
-    std::cout << "=== Selected Candidates ===" << std::endl;
-
-    int selectedCount = 0;
-
-    for (const auto &goodStudent : goodStudents)
-    {
-        if (selectedCount >= count)
-            break;
-        goodStudent->ShowMyInfo();
-        std::cout << "-------------------" << std::endl;
-        selectedCount++;
-    }
-
-    for (const auto &normalStudent : normalStudents)
-    {
-        if (selectedCount >= count)
-            break;
-        normalStudent->ShowMyInfo();
-        std::cout << "-------------------" << std::endl;
-        selectedCount++;
-    }
-
-    if (selectedCount < count)
-    {
-        std::cout << "Not enough candidates to fulfill the requirement.\n";
-    }
-}
-
-void RecruitmentManager::SortStudents()
-{
-
-    std::sort(students.begin(), students.end(), [](const std::shared_ptr<Student> &a, const std::shared_ptr<Student> &b)
-              {
-                  if (a->GetFullName() != b->GetFullName())
-                  {
-                      return a->GetFullName() > b->GetFullName(); 
-                  }
-                  return a->GetPhoneNumber() < b->GetPhoneNumber(); });
-
-    std::cout << "Students sorted successfully.\n";
-}
-
 void RecruitmentManager::InputStudent()
 {
     int choice;
@@ -207,4 +115,96 @@ void RecruitmentManager::InputStudent()
     {
         std::cout << "Invalid choice! Returning to menu.\n";
     }
+}
+
+void RecruitmentManager::DisplayAllStudents()
+{
+    std::cout << "=== All Students ===" << std::endl;
+    for (const auto &student : students)
+    {
+        student->ShowMyInfo();
+        std::cout << "-------------------" << std::endl;
+    }
+}
+
+void RecruitmentManager::SelectCandidates(int count)
+{
+    if (count < 11 || count > 15)
+    {
+        std::cout << "Invalid number of candidates. Please choose between 11 and 15.\n";
+        return;
+    }
+
+    std::vector<std::shared_ptr<GoodStudent>> goodStudents;
+    std::vector<std::shared_ptr<NormalStudent>> normalStudents;
+
+    for (const auto &student : students)
+    {
+        if (std::shared_ptr<GoodStudent> goodStudent = std::dynamic_pointer_cast<GoodStudent>(student))
+        {
+            goodStudents.push_back(goodStudent);
+        }
+        else if (std::shared_ptr<NormalStudent> normalStudent = std::dynamic_pointer_cast<NormalStudent>(student))
+        {
+            normalStudents.push_back(normalStudent);
+        }
+    }
+
+    std::sort(goodStudents.begin(), goodStudents.end(), [](const std::shared_ptr<GoodStudent> &a, const std::shared_ptr<GoodStudent> &b)
+              {
+        if (a->GetGPA() != b->GetGPA()) {
+            return a->GetGPA() > b->GetGPA();
+        }
+        return a->GetFullName() < b->GetFullName(); });
+
+    std::sort(normalStudents.begin(), normalStudents.end(), [](const std::shared_ptr<NormalStudent> &a, const std::shared_ptr<NormalStudent> &b)
+              {
+        if (a->GetEntryTestScore() != b->GetEntryTestScore()) {
+            return a->GetEntryTestScore() > b->GetEntryTestScore();
+        }
+        if (a->GetEnglishScore() != b->GetEnglishScore()) {
+            return a->GetEnglishScore() > b->GetEnglishScore();
+        }
+        return a->GetFullName() < b->GetFullName(); });
+
+    std::cout << "=== Selected Candidates ===" << std::endl;
+
+    int selectedCount = 0;
+
+    for (const auto &goodStudent : goodStudents)
+    {
+        if (selectedCount >= count)
+            break;
+        goodStudent->ShowMyInfo();
+        std::cout << "-------------------" << std::endl;
+        selectedCount++;
+    }
+
+    for (const auto &normalStudent : normalStudents)
+    {
+        if (selectedCount >= count)
+            break;
+        normalStudent->ShowMyInfo();
+        std::cout << "-------------------" << std::endl;
+        selectedCount++;
+    }
+
+    if (selectedCount < count)
+    {
+        std::cout << "Not enough candidates to fulfill the requirement.\n";
+    }
+}
+
+void RecruitmentManager::SortStudents()
+{
+
+    std::sort(students.begin(), students.end(), [](const std::shared_ptr<Student> &a, const std::shared_ptr<Student> &b)
+              {
+                  if (a->GetFullName() != b->GetFullName())
+                  {
+                      return a->GetFullName() > b->GetFullName(); 
+                  }
+                  return a->GetPhoneNumber() < b->GetPhoneNumber(); });
+
+    std::cout << "Students sorted successfully.\n";
 }

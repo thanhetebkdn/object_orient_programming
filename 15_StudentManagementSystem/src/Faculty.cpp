@@ -2,6 +2,10 @@
 #include <iostream>
 #include <algorithm>
 #include "PartTimeStudent.h"
+#include "Exception.h"
+#include "Validation.h"
+#include <limits>
+#include <map>
 
 Faculty::Faculty() : faculty_name("") {}
 
@@ -98,31 +102,95 @@ std::map<int, int> Faculty::countStudentsByEnrollmentYear() const
 
 void Faculty::inputFaculty()
 {
-    std::cout << "Enter faculty name: ";
-    std::getline(std::cin, faculty_name);
+
+    do
+    {
+        try
+        {
+            std::cout << "Enter faculty name: ";
+            std::getline(std::cin, faculty_name);
+            if (isValidFacultyName(faculty_name))
+                break;
+        }
+        catch (const std::exception &e)
+        {
+            std::cout << "Error: " << e.what() << " Please try again.\n";
+        }
+    } while (true);
 
     int num_students;
-    std::cout << "Enter number of students: ";
-    std::cin >> num_students;
-    std::cin.ignore();
+    do
+    {
+        try
+        {
+            std::cout << "Enter number of students: ";
+            std::cin >> num_students;
 
-    students.resize(num_students);
-    for (int i = 0; i < num_students; ++i)
+            if (std::cin.fail())
+            {
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                throw std::invalid_argument("Input must be a valid integer.");
+            }
+
+            std::cin.ignore();
+
+            if (isValidNumberOfStudents(num_students))
+            {
+                students.resize(num_students);
+                break;
+            }
+        }
+        catch (const std::exception &e)
+        {
+            std::cout << "Error: " << e.what() << " Please try again.\n";
+        }
+    } while (true);
+
+    for (int i = 0; i < students.size(); ++i)
     {
         std::cout << "Enter information for student " << i + 1 << ":\n";
-        std::string type;
-        std::cout << "Is the student full-time or part-time? (full/part): ";
-        std::getline(std::cin, type);
 
-        if (type == "part")
+        do
         {
-            students[i] = std::make_shared<PartTimeStudent>();
-        }
-        else
+            try
+            {
+                std::string type;
+                std::cout << "Is the student full-time or part-time? (full/part): ";
+                std::getline(std::cin, type);
+
+                if (type == "part")
+                {
+                    students[i] = std::make_shared<PartTimeStudent>();
+                }
+                else if (type == "full")
+                {
+                    students[i] = std::make_shared<Student>();
+                }
+                else
+                {
+                    throw std::invalid_argument("Invalid student type! Must be 'full' or 'part'.");
+                }
+                break;
+            }
+            catch (const std::exception &e)
+            {
+                std::cout << "Error: " << e.what() << " Please try again.\n";
+            }
+        } while (true);
+
+        do
         {
-            students[i] = std::make_shared<Student>();
-        }
-        students[i]->inputInfor();
+            try
+            {
+                students[i]->inputInfor();
+                break;
+            }
+            catch (const std::exception &e)
+            {
+                std::cout << "Error while entering student info: " << e.what() << " Please try again.\n";
+            }
+        } while (true);
     }
 }
 

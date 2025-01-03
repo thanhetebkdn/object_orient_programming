@@ -1,4 +1,8 @@
+#include <limits>
+#include <regex>
 #include "PartTimeStudent.h"
+#include "Exception.h"
+#include "Validation.h"
 
 PartTimeStudent::PartTimeStudent()
     : Student(), training_location("") {}
@@ -14,12 +18,20 @@ void PartTimeStudent::inputInfor()
 
     std::cout << "Enter training location: ";
     std::getline(std::cin, training_location);
+    try
+    {
+        isValidTrainingLocation(training_location);
+    }
+    catch (const InvalidTrainingLocationException &e)
+    {
+        std::cout << e.what() << std::endl;
+        return;
+    }
 }
 
 void PartTimeStudent::outputInfor()
 {
     Student::outputInfor();
-
     std::cout << "Training Location: " << training_location << std::endl;
 }
 

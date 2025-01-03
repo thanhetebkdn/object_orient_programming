@@ -1,9 +1,9 @@
 #ifndef EMPLOYEEMANAGER_H
 #define EMPLOYEEMANAGER_H
 
-#include "Employee.h"
 #include <vector>
 #include <memory>
+#include "Employee.h"
 
 class EmployeeManager
 {

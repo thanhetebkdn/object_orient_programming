@@ -32,23 +32,23 @@ int main()
     {
         showMenu();
         std::cin >> choice;
-        std::cin.ignore(); // Bỏ qua ký tự newline trong input buffer
+        std::cin.ignore();
 
         switch (choice)
         {
-        case 1: // Add Faculty and Students
+        case 1:
             faculty.inputFaculty();
             break;
 
-        case 2: // Show Faculty and Students
+        case 2:
             faculty.outputFaculty();
             break;
 
-        case 3: // Count Full-Time Students
+        case 3:
             std::cout << "Number of full-time students: " << faculty.countFullTimeStudents() << std::endl;
             break;
 
-        case 4: // Find Student with Highest Entry Score
+        case 4:
         {
             auto topEntryScoreStudent = faculty.findTopEntryScoreStudent();
             if (topEntryScoreStudent)
@@ -63,7 +63,7 @@ int main()
         }
         break;
 
-        case 5: // Find Part-Time Students by Location
+        case 5:
         {
             std::string location;
             std::cout << "Enter training location: ";
@@ -77,7 +77,7 @@ int main()
         }
         break;
 
-        case 6: // Find Students with High GPA in Latest Semester
+        case 6:
         {
             auto highGPAStudents = faculty.getHighGPAStudentsInLatestSemester();
             std::cout << "Students with GPA >= 8.0 in the latest semester:\n";
@@ -88,7 +88,7 @@ int main()
         }
         break;
 
-        case 7: // Find Student with Highest GPA
+        case 7:
         {
             auto topGPAStudent = faculty.findTopGPAStudent();
             if (topGPAStudent)
@@ -103,13 +103,13 @@ int main()
         }
         break;
 
-        case 8: // Sort Students by Type and Year
+        case 8:
             faculty.sortStudentsByTypeAndYear();
             std::cout << "Students sorted by type and year:\n";
             faculty.outputFaculty();
             break;
 
-        case 9: // Count Students by Enrollment Year
+        case 9:
         {
             auto studentsByYear = faculty.countStudentsByEnrollmentYear();
             std::cout << "Students count by enrollment year:\n";
@@ -120,7 +120,7 @@ int main()
         }
         break;
 
-        case 0: // Exit
+        case 0:
             running = false;
             std::cout << "Exiting program.\n";
             break;

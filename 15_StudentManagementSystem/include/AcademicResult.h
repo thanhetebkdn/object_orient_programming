@@ -6,12 +6,12 @@
 class AcademicResult
 {
 private:
-    std::string semester_name; // Tên học kỳ
-    float semester_gpa;        // GPA dưới dạng số thực
+    std::string semester_name;
+    float semester_gpa;
 
 public:
-    std::string getGPA(); // Lấy GPA dưới dạng chuỗi
-    void inputResult();   // Nhập kết quả học kỳ
-    void outputResult();  // Xuất kết quả học kỳ
+    std::string getGPA();
+    void inputResult();
+    void outputResult();
 };
 #endif

@@ -1,5 +1,5 @@
-#include "Employee.h"
 #include <iostream>
+#include "Employee.h"
 
 Employee::Employee(std::string n, int a, std::string g, std::string addr)
     : name(n), age(a), gender(g), address(addr) {}
