@@ -1,18 +1,16 @@
 #ifndef MAGAZINE_H
 #define MAGAZINE_H
-#include <iostream>
-#include <string>
+
 #include "Document.h"
 
 class Magazine : public Document
 {
 public:
     Magazine();
-    Magazine(std::string id, std::string publisher,
+    Magazine(const std::string &id, const std::string &publisher,
              int releaseCount, int issueNumber, int releaseMonth);
-
-    void inputInfor() override;
-    void displayInfor() override;
+    void inputInfo() override;
+    void displayInfo() const override;
 
 private:
     int issueNumber;

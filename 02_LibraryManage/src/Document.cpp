@@ -1,14 +1,14 @@
 #include "Document.h"
 
-Document::Document(std::string id, std::string publisher, int releaseCount)
+Document::Document(const std::string &id, const std::string &publisher, int releaseCount)
     : id(id), publisher(publisher), releaseCount(releaseCount) {}
 
-std::string Document::getId()
+const std::string &Document::getId() const
 {
     return id;
 }
 
-void Document::inputInfor()
+void Document::inputInfo()
 {
     std::cout << "Enter ID: ";
     std::cin >> id;
@@ -18,9 +18,8 @@ void Document::inputInfor()
     std::cin >> releaseCount;
 }
 
-void Document::displayInfor()
+void Document::displayInfo() const
 {
-    std::cout << "ID: " << id << std::endl;
-    std::cout << "Publisher: " << publisher << std::endl;
-    std::cout << "Release Count: " << releaseCount << std::endl;
+    std::cout << "ID: " << id << "\nPublisher: " << publisher
+              << "\nRelease Count: " << releaseCount << std::endl;
 }

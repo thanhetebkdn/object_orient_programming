@@ -1,23 +1,24 @@
-#include <Magazine.h>
+#include "Magazine.h"
+#include <iostream>
 
-Magazine::Magazine() : Document("", "", 0) {};
-Magazine::Magazine(std::string id, std::string publisher,
+Magazine::Magazine() : Document("", "", 0), issueNumber(0), releaseMonth(0) {}
+
+Magazine::Magazine(const std::string &id, const std::string &publisher,
                    int releaseCount, int issueNumber, int releaseMonth)
-    : Document(id, publisher, releaseCount),
-      issueNumber(issueNumber), releaseMonth(releaseMonth) {}
+    : Document(id, publisher, releaseCount), issueNumber(issueNumber), releaseMonth(releaseMonth) {}
 
-void Magazine::inputInfor()
+void Magazine::inputInfo()
 {
-    Document::inputInfor();
-    std::cout << "Enter IssueNumber: ";
+    Document::inputInfo();
+    std::cout << "Enter Issue Number: ";
     std::cin >> issueNumber;
     std::cout << "Enter Release Month: ";
     std::cin >> releaseMonth;
 }
 
-void Magazine::displayInfor()
+void Magazine::displayInfo() const
 {
-    Document::displayInfor();
-    std::cout << "Enter Author: " << issueNumber << std::endl;
-    std::cout << "Enter Pages: " << releaseMonth << std::endl;
+    Document::displayInfo();
+    std::cout << "Issue Number: " << issueNumber
+              << "\nRelease Month: " << releaseMonth << std::endl;
 }

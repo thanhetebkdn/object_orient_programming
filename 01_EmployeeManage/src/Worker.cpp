@@ -3,7 +3,7 @@
 
 Worker::Worker() : Employee("", 0, "", ""), level(0) {}
 
-Worker::Worker(std::string n, int a, std::string g, std::string addr, int lvl)
+Worker::Worker(const std::string &n, int a, const std::string &g, const std::string &addr, int lvl)
     : Employee(n, a, g, addr), level(lvl) {}
 
 void Worker::inputInfo()
@@ -13,8 +13,8 @@ void Worker::inputInfo()
     std::cin >> level;
 }
 
-void Worker::displayInfo()
+void Worker::displayInfo() const
 {
     Employee::displayInfo();
-    std::cout << "Worker level: " << level << std::endl;
+    std::cout << "Worker level: " << level << "\n";
 }

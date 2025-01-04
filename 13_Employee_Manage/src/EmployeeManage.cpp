@@ -68,7 +68,7 @@ void EmployeeManage::showAllEmployee()
 
     switch (select)
     {
-    case 1: // Exprience
+    case 1:
         std::cout << "\nEmployees of type Exprience:\n";
         for (const auto &employee : listEmployee)
         {

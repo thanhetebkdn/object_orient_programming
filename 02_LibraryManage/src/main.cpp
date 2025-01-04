@@ -2,36 +2,38 @@
 
 int main()
 {
-    DocumentManager docsmng;
-    while (1)
-    {
-        int select;
-        std::cout << "1. Add a document\n";
-        std::cout << "2. Remove a document\n";
-        std::cout << "3. Display a document\n";
-        std::cout << "4. Search a document\n";
-        std::cout << "5. Exit program\n";
-        std::cout << "Enter your choice: ";
-        std::cin >> select;
+    DocumentManager manager;
 
-        switch (select)
+    while (true)
+    {
+        int choice;
+        std::cout << "1. Add Document\n"
+                  << "2. Remove Document\n"
+                  << "3. Display Documents\n"
+                  << "4. Search Document\n"
+                  << "5. Exit\n"
+                  << "Enter your choice: ";
+        std::cin >> choice;
+
+        switch (choice)
         {
         case 1:
-            docsmng.addDocument();
+            manager.addDocument();
             break;
         case 2:
-            docsmng.removeDocument();
+            manager.removeDocument();
+            break;
         case 3:
-            docsmng.displayDocuments();
+            manager.displayDocuments();
             break;
         case 4:
-            docsmng.searchByType();
+            manager.searchByType();
             break;
         case 5:
-            docsmng.exit();
+            manager.exitProgram();
             return 0;
         default:
-            std::cout << "Error select...!";
+            std::cout << "Invalid choice. Try again.\n";
         }
     }
 

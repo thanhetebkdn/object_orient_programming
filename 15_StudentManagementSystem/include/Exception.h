@@ -102,4 +102,22 @@ public:
     }
 };
 
+class InvalidSemesterNameException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Semester name must not contain special characters!";
+    }
+};
+
+class InvalidGPAException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "GPA must be between 0 and 10.";
+    }
+};
+
 #endif

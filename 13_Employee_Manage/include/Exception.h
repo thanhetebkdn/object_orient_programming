@@ -75,4 +75,83 @@ public:
     }
 };
 
+class ExperienceYearException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Experience Year cannot be negative.";
+    }
+};
+
+class ProfessionalSkillException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Professional Skill cannot be negative.";
+    }
+};
+
+class CertificateCountException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Invalid certificate count. The number of certificates must be a positive integer.";
+    }
+};
+
+class GraduationDateException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Invalid graduation date. Please use dd/mm/yyyy format.";
+    }
+};
+
+class GraduationRankException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Graduation rank must be a valid string.";
+    }
+};
+
+class EducationException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Education field cannot be empty.";
+    }
+};
+
+class MajorException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Major cannot be empty.";
+    }
+};
+class SemesterException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Semester must be a valid integer between 1 and 10.";
+    }
+};
+class UniversityNameException : public std::exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "University name cannot be empty.";
+    }
+};
+
 #endif

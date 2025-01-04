@@ -6,13 +6,13 @@
 class Employee
 {
 public:
-    Employee(std::string n, int a, std::string g, std::string addr);
-    std::string getName();
-    virtual void inputInfo();
-    virtual void displayInfo();
+    Employee(const std::string &n, int a, const std::string &g, const std::string &addr);
     virtual ~Employee() = default;
+    virtual void inputInfo();
+    virtual void displayInfo() const;
+    std::string getName() const;
 
-private:
+protected:
     std::string name;
     int age;
     std::string gender;

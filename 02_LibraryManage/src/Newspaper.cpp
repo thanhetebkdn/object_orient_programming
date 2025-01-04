@@ -1,20 +1,22 @@
 #include "Newspaper.h"
+#include <iostream>
 
-Newspaper::Newspaper() : Document("", "", 0) {}
-Newspaper::Newspaper(std::string id, std::string publisher,
-                     int releaseCount, std::string releaseDate)
-    : Document(id, publisher, releaseCount),
-      releaseDate(releaseDate) {}
+Newspaper::Newspaper() : Document("", "", 0), releaseDate("") {}
 
-void Newspaper::inputInfor()
+Newspaper::Newspaper(const std::string &id, const std::string &publisher,
+                     int releaseCount, const std::string &releaseDate)
+    : Document(id, publisher, releaseCount), releaseDate(releaseDate) {}
+
+void Newspaper::inputInfo()
 {
-    Document::inputInfor();
+    Document::inputInfo();
+    std::cin.ignore();
     std::cout << "Enter Release Date: ";
     std::getline(std::cin, releaseDate);
 }
 
-void Newspaper::displayInfor()
+void Newspaper::displayInfo() const
 {
-    Document::displayInfor();
-    std::cout << "Enter Release Date: " << releaseDate << std::endl;
+    Document::displayInfo();
+    std::cout << "Release Date: " << releaseDate << std::endl;
 }

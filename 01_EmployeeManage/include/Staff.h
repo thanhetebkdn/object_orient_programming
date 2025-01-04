@@ -7,9 +7,9 @@ class Staff : public Employee
 {
 public:
     Staff();
-    Staff(std::string n, int a, std::string g, std::string addr, std::string j);
+    Staff(const std::string &n, int a, const std::string &g, const std::string &addr, const std::string &j);
     void inputInfo() override;
-    void displayInfo() override;
+    void displayInfo() const override;
 
 private:
     std::string job;

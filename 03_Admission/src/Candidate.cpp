@@ -1,5 +1,4 @@
-
-
+#include <limits>
 #include <Candidate.h>
 
 Candidate::Candidate(std::string id, std::string name,
@@ -23,7 +22,12 @@ void Candidate::inputInfor()
     std::getline(std::cin, address);
 
     std::cout << "Enter your priority: ";
-    std::cin >> priority;
+    while (!(std::cin >> priority))
+    {
+        std::cin.clear();                                                   // clear the error flag
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore invalid input
+        std::cout << "Invalid input. Enter a valid priority: ";
+    }
 }
 
 void Candidate::displayInfor()

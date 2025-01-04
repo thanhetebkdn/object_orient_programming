@@ -1,96 +1,91 @@
-#include <DocumentManager.h>
-#include <Document.h>
-#include <Book.h>
-#include <Newspaper.h>
-#include <Magazine.h>
-#include <memory>
-#include <vector>
-#include <string>
+#include "DocumentManager.h"
+#include "Book.h"
+#include "Magazine.h"
+#include "Newspaper.h"
+#include <iostream>
+#include <algorithm>
 
 void DocumentManager::addDocument()
 {
-    std::cout << "1. Book - 2.Magazine - 3. Newspaper\n";
-    int select;
-    std::cout << "Enter Type Document: ";
-    std::cin >> select;
+    std::cout << "1. Book - 2. Magazine - 3. Newspaper\n";
+    int choice;
+    std::cout << "Enter Document Type: ";
+    std::cin >> choice;
 
     std::unique_ptr<Document> document = nullptr;
 
-    if (select == 1)
-    {
+    if (choice == 1)
         document = std::make_unique<Book>();
-    }
-    else if (select == 2)
-    {
+    else if (choice == 2)
         document = std::make_unique<Magazine>();
-    }
-    else if (select == 3)
-    {
+    else if (choice == 3)
         document = std::make_unique<Newspaper>();
+    else
+    {
+        std::cout << "Invalid selection!\n";
+        return;
+    }
+
+    document->inputInfo();
+    documentList.push_back(std::move(document));
+}
+
+void DocumentManager::removeDocument()
+{
+    std::cin.ignore();
+    std::string id;
+    std::cout << "Enter ID to remove: ";
+    std::getline(std::cin, id);
+
+    auto it = std::remove_if(documentList.begin(), documentList.end(),
+                             [&id](const std::unique_ptr<Document> &doc)
+                             { return doc->getId() == id; });
+
+    if (it != documentList.end())
+    {
+        documentList.erase(it, documentList.end());
+        std::cout << "Document removed successfully.\n";
     }
     else
     {
-        std::cout << "Select error...!\n";
+        std::cout << "Document not found.\n";
+    }
+}
+
+void DocumentManager::displayDocuments() const
+{
+    if (documentList.empty())
+    {
+        std::cout << "No documents to display.\n";
         return;
     }
 
-    document->inputInfor();
-    listDocument.push_back(std::move(document));
-}
-void DocumentManager::removeDocument()
-{
-    std::string typeRemove;
-    std::cout << "Enter typeDocs that wants to remove....!";
-    std::getline(std::cin, typeRemove);
-
-    for (auto it = listDocument.begin(); it != listDocument.end(); it++)
+    for (const auto &doc : documentList)
     {
-        if ((*it)->getId() == typeRemove)
+        doc->displayInfo();
+        std::cout << "---------------------\n";
+    }
+}
+
+void DocumentManager::searchByType() const
+{
+    std::cin.ignore();
+    std::string id;
+    std::cout << "Enter ID to search: ";
+    std::getline(std::cin, id);
+
+    for (const auto &doc : documentList)
+    {
+        if (doc->getId() == id)
         {
-            listDocument.erase(it);
-            std::cout << "Remove element " << typeRemove;
-            break;
+            doc->displayInfo();
+            return;
         }
     }
+    std::cout << "Document not found.\n";
 }
-void DocumentManager::displayDocuments()
-{
-    if (listDocument.empty())
-    {
-        std::cout << "Lisst documents is empty...!\n";
-        return;
-    }
 
-    for (auto &docs : listDocument)
-    {
-        docs->displayInfor();
-        std::cout << "---------------------" << std::endl;
-    }
-}
-void DocumentManager::searchByType()
+void DocumentManager::exitProgram()
 {
-    bool isFind = false;
-    std::string typeDocs;
-    std::cout << "Enter your Type Docs: ";
-    std::getline(std::cin, typeDocs);
-
-    for (auto &docs : listDocument)
-    {
-        if (docs->getId() == typeDocs)
-        {
-            std::cout << "Found type: " << typeDocs << std::endl;
-            isFind = true;
-            break;
-            ;
-        }
-    }
-
-    if (!isFind)
-    {
-        std::cout << typeDocs << " not found...!\n";
-    }
-}
-void DocumentManager::exit()
-{
-    std::cout << "Exit the program....!\n";
+    std::cout << "Exiting program...\n";
 }

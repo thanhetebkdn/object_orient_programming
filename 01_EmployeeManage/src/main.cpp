@@ -4,15 +4,16 @@
 int main()
 {
     EmployeeManager manager;
+    bool isRunning = true;
 
-    while (1)
+    while (isRunning)
     {
         int choice;
-        std::cout << "1. Add new employee\n";
-        std::cout << "2. Search employee by name\n";
-        std::cout << "3. Display all employees\n";
-        std::cout << "4. Exit\n";
-        std::cout << "Enter your choice: ";
+        std::cout << "1. Add new employee\n"
+                  << "2. Search employee by name\n"
+                  << "3. Display all employees\n"
+                  << "4. Exit\n"
+                  << "Enter your choice: ";
         std::cin >> choice;
 
         switch (choice)
@@ -27,10 +28,10 @@ int main()
             manager.displayAll();
             break;
         case 4:
-            manager.exitProgram();
-            return 0;
+            isRunning = false;
+            break;
         default:
-            std::cout << "Invalid choice";
+            std::cout << "Invalid choice. Try again.\n";
         }
     }
 

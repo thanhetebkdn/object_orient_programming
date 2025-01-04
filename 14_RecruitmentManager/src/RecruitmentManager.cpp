@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <limits>
 #include <regex>
 #include "Exception.h"
 #include "Validation.h"
@@ -16,18 +17,35 @@ void RecruitmentManager::AddStudent(std::shared_ptr<Student> student)
 void RecruitmentManager::InputStudent()
 {
     int choice;
-    std::cout << "Enter type of student (1: GoodStudent, 2: NormalStudent): ";
-    std::cin >> choice;
+    while (true)
+    {
+        std::cout << "Enter type of student (1: GoodStudent, 2: NormalStudent): ";
+        std::cin >> choice;
+
+        try
+        {
+            isValidStudentType(choice);
+            break;
+        }
+        catch (const InvalidStudentTypeException &e)
+        {
+            std::cout << e.what() << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
 
     std::cin.ignore();
 
     std::string fullName, doB, sex, phoneNumber, universityName, gradeLevel;
+    float gpa;
+    std::string bestRewardName;
+    int englishScore, entryTestScore;
 
     while (true)
     {
         std::cout << "Enter full name: ";
         std::getline(std::cin, fullName);
-
         try
         {
             isValidFullName(fullName);
@@ -43,7 +61,6 @@ void RecruitmentManager::InputStudent()
     {
         std::cout << "Enter date of birth (dd/MM/yyyy): ";
         std::getline(std::cin, doB);
-
         try
         {
             isValidBirthday(doB);
@@ -62,7 +79,6 @@ void RecruitmentManager::InputStudent()
     {
         std::cout << "Enter phone number: ";
         std::getline(std::cin, phoneNumber);
-
         try
         {
             isValidPhoneNumber(phoneNumber);
@@ -74,24 +90,79 @@ void RecruitmentManager::InputStudent()
         }
     }
 
-    std::cout << "Enter university name: ";
-    std::getline(std::cin, universityName);
+    try
+    {
+        isValidStudentType(choice);
+    }
+    catch (const InvalidStudentTypeException &e)
+    {
+        std::cout << e.what() << std::endl;
+        return;
+    }
 
-    std::cout << "Enter grade level: ";
-    std::getline(std::cin, gradeLevel);
+    while (true)
+    {
+        std::cout << "Enter university name: ";
+        std::getline(std::cin, universityName);
+        try
+        {
+            isValidUniversityName(universityName);
+            break;
+        }
+        catch (const InvalidUniversityNameException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+
+    while (true)
+    {
+        std::cout << "Enter grade level: ";
+        std::getline(std::cin, gradeLevel);
+        try
+        {
+            isValidGradeLevel(gradeLevel);
+            break;
+        }
+        catch (const InvalidGradeLevelException &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
 
     if (choice == 1)
     {
-        float gpa;
-        std::string bestRewardName;
 
-        std::cout << "Enter GPA: ";
-        std::cin >> gpa;
+        while (true)
+        {
+            std::cout << "Enter GPA: ";
+            std::cin >> gpa;
+            std::cin.ignore();
+            try
+            {
+                isValidGPA(gpa);
+                break;
+            }
+            catch (const InvalidGPAException &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
+        }
 
-        std::cin.ignore();
-
-        std::cout << "Enter best reward name: ";
-        std::getline(std::cin, bestRewardName);
+        while (true)
+        {
+            std::cout << "Enter best reward name: ";
+            std::getline(std::cin, bestRewardName);
+            try
+            {
+                isValidBestRewardName(bestRewardName);
+                break;
+            }
+            catch (const InvalidBestRewardNameException &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
+        }
 
         auto goodStudent = std::make_shared<GoodStudent>(
             fullName, doB, sex, phoneNumber, universityName, gradeLevel, gpa, bestRewardName);
@@ -99,21 +170,40 @@ void RecruitmentManager::InputStudent()
     }
     else if (choice == 2)
     {
-        int englishScore, entryTestScore;
 
-        std::cout << "Enter English score (TOEIC): ";
-        std::cin >> englishScore;
+        while (true)
+        {
+            std::cout << "Enter English score (TOEIC): ";
+            std::cin >> englishScore;
+            try
+            {
+                isValidEnglishScore(englishScore);
+                break;
+            }
+            catch (const InvalidEnglishScoreException &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
+        }
 
-        std::cout << "Enter entry test score: ";
-        std::cin >> entryTestScore;
+        while (true)
+        {
+            std::cout << "Enter entry test score: ";
+            std::cin >> entryTestScore;
+            try
+            {
+                isValidEntryTestScore(entryTestScore);
+                break;
+            }
+            catch (const InvalidEntryTestScoreException &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
+        }
 
         auto normalStudent = std::make_shared<NormalStudent>(
             fullName, doB, sex, phoneNumber, universityName, gradeLevel, englishScore, entryTestScore);
         AddStudent(normalStudent);
-    }
-    else
-    {
-        std::cout << "Invalid choice! Returning to menu.\n";
     }
 }
 

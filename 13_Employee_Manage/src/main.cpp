@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <cctype>
 #include "EmployeeManage.h"
 
 void showMenu()
@@ -13,15 +15,36 @@ void showMenu()
               << "Enter your choice: ";
 }
 
+bool isNumber(const std::string &input)
+{
+    for (char c : input)
+    {
+        if (!std::isdigit(c))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 int main()
 {
     EmployeeManage employeeManage;
     int choice = 0;
+    std::string input;
 
     while (choice != 5)
     {
         showMenu();
-        std::cin >> choice;
+        std::cin >> input;
+
+        if (!isNumber(input))
+        {
+            std::cerr << "Invalid input! Please enter a number.\n";
+            continue;
+        }
+
+        choice = std::stoi(input);
 
         switch (choice)
         {
@@ -46,7 +69,7 @@ int main()
             break;
 
         default:
-            std::cerr << "Please try again.\n";
+            std::cerr << "Invalid choice! Please try again.\n";
             break;
         }
     }

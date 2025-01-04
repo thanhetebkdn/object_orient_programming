@@ -126,3 +126,22 @@ bool isValidEnrollmentYear(int year)
     }
     return true;
 }
+
+bool isValidSemesterName(const std::string &semester_name)
+{
+    std::regex semesterNameRegex(R"(^[A-Za-z0-9\s]+$)");
+    if (!std::regex_match(semester_name, semesterNameRegex))
+    {
+        throw InvalidSemesterNameException();
+    }
+    return true;
+}
+
+bool isValidGPA(double gpa)
+{
+    if (gpa < 0.0 || gpa > 10.0)
+    {
+        throw InvalidGPAException();
+    }
+    return true;
+}

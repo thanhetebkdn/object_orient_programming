@@ -62,19 +62,19 @@ void Admision::findCandidate()
     {
         if (x->getId() == findID)
         {
-
             std::cout << "Found ID: " << findID << std::endl;
+            x->displayInfor(); // To display found candidate info
+            isFind = true;
+            break;
         }
-
-        isFind = true;
-        break;
     }
 
     if (!isFind)
     {
-        std::cout << "Found is fail";
+        std::cout << "Candidate not found.\n";
     }
 }
+
 void Admision::exit()
 {
     std::cout << "Exit the program";

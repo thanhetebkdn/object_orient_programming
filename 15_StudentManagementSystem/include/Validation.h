@@ -14,5 +14,7 @@ bool isValidTrainingLocation(const std::string &location);
 bool isValidFacultyName(const std::string &name);
 bool isValidNumberOfStudents(int num_students);
 bool isValidEnrollmentYear(int year);
+bool isValidSemesterName(const std::string &semester_name);
+bool isValidGPA(double gpa);
 
 #endif

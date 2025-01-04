@@ -1,58 +1,59 @@
-#include <iostream>
-#include <memory>
 #include "EmployeeManager.h"
 #include "Worker.h"
 #include "Engineer.h"
 #include "Staff.h"
+#include <iostream>
+#include <limits>
 
 void EmployeeManager::addNewEmployee()
 {
     int employeeType;
-    std::cout << "1. Worker - 2. Engineer - 3. Staff\n";
+    std::cout << "1. Worker - 2. Engineer - 3. Staff: ";
     std::cin >> employeeType;
 
-    std::unique_ptr<Employee> employee = nullptr;
+    std::unique_ptr<Employee> employee;
 
-    if (employeeType == 1)
+    switch (employeeType)
     {
+    case 1:
         employee = std::make_unique<Worker>();
-    }
-    else if (employeeType == 2)
-    {
+        break;
+    case 2:
         employee = std::make_unique<Engineer>();
-    }
-    else if (employeeType == 3)
-    {
+        break;
+    case 3:
         employee = std::make_unique<Staff>();
-    }
-    else
-    {
-        std::cout << "Invalid input\n";
+        break;
+    default:
+        std::cout << "Invalid choice\n";
         return;
     }
+
     employee->inputInfo();
     employeeList.push_back(std::move(employee));
 }
 
 void EmployeeManager::searchByName()
 {
-    bool found = false;
-    std::string employeeName;
-    std::cout << "Enter employee name to search: \n";
-    std::cin >> employeeName;
+    std::string name;
+    std::cin.ignore();
+    std::cout << "Enter employee name to search: ";
+    std::getline(std::cin, name);
 
-    for (auto &employee : employeeList)
+    bool found = false;
+    for (const auto &employee : employeeList)
     {
-        if (employeeName == employee->getName())
+        if (employee->getName() == name)
         {
             employee->displayInfo();
+            std::cout << "---------------------\n";
             found = true;
-            break;
         }
     }
+
     if (!found)
     {
-        std::cout << "No employee found with name: " << employeeName << std::endl;
+        std::cout << "No employee found with name: " << name << "\n";
     }
 }
 
@@ -60,19 +61,19 @@ void EmployeeManager::displayAll()
 {
     if (employeeList.empty())
     {
-        std::cout << "Employee list is empty\n";
+        std::cout << "No employees in the list.\n";
         return;
     }
 
-    for (auto &employee : employeeList)
+    for (const auto &employee : employeeList)
     {
         employee->displayInfo();
-        std::cout << "---------------------" << std::endl;
+        std::cout << "---------------------\n";
     }
 }
 
 void EmployeeManager::exitProgram()
 {
-    std::cout << "Exiting program\n";
+    std::cout << "Exiting program...\n";
     exit(0);
 }

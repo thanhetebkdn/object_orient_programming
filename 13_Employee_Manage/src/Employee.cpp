@@ -28,10 +28,20 @@ void Employee::inputInfor()
     {
         std::cout << "Enter your ID: ";
         std::cin >> id;
+
+        if (std::cin.fail())
+        {
+            std::cerr << "Invalid input. Please enter a positive integer." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(INT_MAX, '\n');
+            continue;
+        }
+
         if (id <= 0)
         {
             std::cerr << "Invalid ID. Please enter a positive integer." << std::endl;
         }
+
     } while (id <= 0);
 
     do
@@ -114,8 +124,21 @@ void Employee::inputInfor()
     }
 
     int certCount;
-    std::cout << "Enter number of Certificates: ";
-    std::cin >> certCount;
+    do
+    {
+        std::cout << "Enter number of Certificates: ";
+        std::cin >> certCount;
+
+        try
+        {
+            isValidCertificateCount(certCount);
+            break;
+        }
+        catch (const CertificateCountException &e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+    } while (true);
 
     for (int i = 0; i < certCount; i++)
     {

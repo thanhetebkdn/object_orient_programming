@@ -7,9 +7,9 @@ class Worker : public Employee
 {
 public:
     Worker();
-    Worker(std::string n, int a, std::string g, std::string addr, int lvl);
+    Worker(const std::string &n, int a, const std::string &g, const std::string &addr, int lvl);
     void inputInfo() override;
-    void displayInfo() override;
+    void displayInfo() const override;
 
 private:
     int level;

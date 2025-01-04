@@ -7,9 +7,9 @@ class Engineer : public Employee
 {
 public:
     Engineer();
-    Engineer(std::string n, int a, std::string g, std::string addr, std::string m);
+    Engineer(const std::string &n, int a, const std::string &g, const std::string &addr, const std::string &m);
     void inputInfo() override;
-    void displayInfo() override;
+    void displayInfo() const override;
 
 private:
     std::string major;

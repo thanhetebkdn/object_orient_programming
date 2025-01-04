@@ -9,12 +9,51 @@ Fresher::Fresher(std::string graduationDate, std::string graduationRank,
 void Fresher::inputInfor()
 {
     Employee::inputInfor();
-    std::cout << "Enter your Graduation Date: ";
-    std::cin >> graduationDate;
-    std::cout << "Enter your Graduation Rank: ";
-    std::cin >> graduationRank;
-    std::cout << "Enter your Education: ";
-    std::cin >> education;
+
+    do
+    {
+        std::cout << "Enter your Graduation Date (dd/mm/yyyy): ";
+        std::cin >> graduationDate;
+        try
+        {
+            isValidGraduationDate(graduationDate);
+            break;
+        }
+        catch (const GraduationDateException &e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+    } while (true);
+
+    do
+    {
+        std::cout << "Enter your Graduation Rank: ";
+        std::cin >> graduationRank;
+        try
+        {
+            isValidGraduationRank(graduationRank);
+            break;
+        }
+        catch (const GraduationRankException &e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+    } while (true);
+
+    do
+    {
+        std::cout << "Enter your Education: ";
+        std::cin >> education;
+        try
+        {
+            isValidEducation(education);
+            break;
+        }
+        catch (const EducationException &e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+    } while (true);
 }
 
 void Fresher::showInfor()
